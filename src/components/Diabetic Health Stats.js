@@ -12,7 +12,7 @@ const DiabeticStatsDetails = ({ stats }) => {
  
   const handleDelete = async () => {
     try {
-      const response = await fetch(`https://diabetes-back.vercel.app/
+      const response = await fetch(`https://diabetes-back.vercel.app
       /api/diabeticStats/${stats._id}`, {
         method: 'DELETE',
         headers: {
