@@ -33,7 +33,7 @@ const DiabeticStatsDetails = ({ stats }) => {
   useEffect(() => {
     const fetchDiabeticStats = async () => {
       try {
-        const response = await fetch('https://diabetes-back.vercel.app//api/diabeticStats/${stats._id}', {
+        const response = await fetch('https://diabetes-back.vercel.app/api/diabeticStats/${stats._id}', {
           headers: {
             'Authorization': `Bearer ${user.token}`
           }
