@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDiabeticContext } from '../hooks/DiabeticStatsContext';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { format } from 'date-fns';
