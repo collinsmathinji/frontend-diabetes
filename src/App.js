@@ -22,7 +22,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <div className="pages">
-          <DiabeticStatsContextProvider>
+          <DiabeticStatsContext.Provider>
             <Routes>
               <Route
                 path="/"
@@ -40,7 +40,7 @@ function App() {
              <Route path="/stop" element={<Stop />} />
              <Route path="/emergency" element={user?<Emergency />:<Login />} />
             </Routes>
-          </DiabeticStatsContextProvider>
+          </DiabeticStatsContext.Provider>
         </div>
         <Footer />
       </BrowserRouter>
