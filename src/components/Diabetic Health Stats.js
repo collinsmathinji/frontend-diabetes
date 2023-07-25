@@ -12,7 +12,8 @@ const DiabeticStatsDetails = ({ stats }) => {
  
   const handleDelete = async () => {
     try {
-      const response = await fetch(`https://vercel.com/collinsmathinji/diabetes-back/HbqSUGH81frver1RHnTNABg57kuy/api/diabeticStats/${stats._id}`, {
+      const response = await fetch(`https://diabetes-back-l9ansgb07-collinsmathinji.vercel.app
+      /api/diabeticStats/${stats._id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${user.token}`
