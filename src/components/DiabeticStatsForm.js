@@ -33,7 +33,7 @@ const DiabeticStatsForm = () => {
     const diabeticStats = { bloodSugarLevel, insulinIntake, medication };
 
     try {
-      const response = await fetch('https://diabetes-back.vercel.app:4000/api/diabeticStats', {
+      const response = await fetch('https://diabetes-back.vercel.app/api/diabeticStats', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

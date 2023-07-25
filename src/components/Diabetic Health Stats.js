@@ -12,7 +12,7 @@ const DiabeticStatsDetails = ({ stats }) => {
  
   const handleDelete = async () => {
     try {
-      const response = await fetch(`https://diabetes-back.vercel.app:4000/api/diabeticStats/${stats._id}`, {
+      const response = await fetch(`https://diabetes-back.vercel.app/api/diabeticStats/${stats._id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${user.token}`
@@ -32,7 +32,7 @@ const DiabeticStatsDetails = ({ stats }) => {
   useEffect(() => {
     const fetchDiabeticStats = async () => {
       try {
-        const response = await fetch(`https://diabetes-back.vercel.app:4000/api/diabeticStats/${stats._id}`, {
+        const response = await fetch(`https://diabetes-back.vercel.app/api/diabeticStats/${stats._id}`, {
           headers: {
             'Authorization': `Bearer ${user.token}`
           }
