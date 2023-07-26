@@ -12,7 +12,7 @@ const DiabeticStatsDetails = ({ stats }) => {
  
   const handleDelete = async () => {
     try {
-      const response = await fetch(`https://diabetes-back-2d5eh4lqx-collinsmathinji.vercel.app/api/diabeticStats/${stats._id}`, {
+      const response = await fetch(`https://diabetes-back-git-main-collinsmathinji.vercel.app/api/diabeticStats/${stats._id}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${user.token}`
@@ -32,7 +32,7 @@ const DiabeticStatsDetails = ({ stats }) => {
   useEffect(() => {
     const fetchDiabeticStats = async () => {
       try {
-        const response = await fetch(`https://diabetes-back-2d5eh4lqx-collinsmathinji.vercel.app/api/diabeticStats/${stats._id}`, {
+        const response = await fetch(`https://diabetes-back-git-main-collinsmathinji.vercel.app/api/diabeticStats/${stats._id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${user.token}`
