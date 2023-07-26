@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchDiabeticStats = async () => {
-      const response = await fetch('https://vercel.com/collinsmathinji/diabetes-back/2MsWHxaRkoCDrQEBt7BVvDN7egxi/api/diabeticStats', {
+      const response = await fetch('https://diabetes-back-2d5eh4lqx-collinsmathinji.vercel.app/api/diabeticStats', {
         headers: { 'Authorization': `Bearer ${user.token}` },
       });
       const json = await response.json();
