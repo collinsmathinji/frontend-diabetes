@@ -10,7 +10,7 @@ export const useLogin = () => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch('https://diabetes-back-git-main-collinsmathinji.vercel.app/api/user/login', {
+    const response = await fetch('https://vercel.com/collinsmathinji/diabetes-back/2MsWHxaRkoCDrQEBt7BVvDN7egxi/api/user/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ email, password })
