@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 import Emergency from './components/emergency';
 import About from './components/about';
 import Stop from './components/stop';
-// Import the DiabeticStatsContextProvider
+
 import { DiabeticStatsContextProvider } from './context/DiabeticStats';;
 
 function App() {
