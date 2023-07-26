@@ -12,7 +12,7 @@ export const useLogin = () => {
 
     const response = await fetch('https://diabetes-back.vercel.app/api/user/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ email, password })
     })
     const json = await response.json()
@@ -23,7 +23,7 @@ export const useLogin = () => {
     }
     if (response.ok) {
       localStorage.setItem('user', JSON.stringify(json))
-      dispatch({ type: 'LOGIN', payload: json })
+      dispatch({type: 'LOGIN', payload: json})
       setIsLoading(false)
     }
   }

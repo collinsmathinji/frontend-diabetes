@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { DiabeticStatsContext} from './context/DiabeticStats'; // Update the import to use DiabeticStatsContextProvider
-import { AuthContext } from './context/AuthContext';
+import { DiabeticStatsContextProvider} from './context/DiabeticStats'; // Update the import to use DiabeticStatsContextProvider
+import { AuthContextProvider } from './context/AuthContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContext.Provider>
-      <DiabeticStatsContext.Provider> 
+    <AuthContextProvider>
+      <DiabeticStatsContextProvider> 
         <App />
-      </DiabeticStatsContext.Provider>
-    </AuthContext.Provider>
+      </DiabeticStatsContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
