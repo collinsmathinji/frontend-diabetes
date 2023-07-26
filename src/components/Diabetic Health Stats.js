@@ -9,7 +9,7 @@ const DiabeticStatsDetails = ({ stats }) => {
   const { user } = useAuthContext();
 
   const [diabeticStats, setDiabeticStats] = useState(null);
- 
+ console.log(user.token)
   const handleDelete = async () => {
     try {
       const response = await fetch(`https://diabetes-back.vercel.app/api/diabeticStats/${stats._id}`, {
