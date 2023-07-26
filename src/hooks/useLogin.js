@@ -22,7 +22,6 @@ export const useLogin = () => {
       setError(json.error)
     }
     if (response.ok) {
-      // Store user token in local storage
       localStorage.setItem('user', JSON.stringify(json))
       dispatch({ type: 'LOGIN', payload: json })
       setIsLoading(false)
