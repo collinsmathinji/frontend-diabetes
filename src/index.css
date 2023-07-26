@@ -467,6 +467,10 @@ form.login button{
   .video-container{
     display: none;
   }
+  img.slider{
+    width: 20px;
+    height: 50px;
+  }
   form.diabetic-stats-form {
     width: 270px;
     margin: 40px auto;
