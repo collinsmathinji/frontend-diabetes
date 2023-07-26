@@ -36,8 +36,8 @@ export const DiabeticStatsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(diabeticStatsReducer, initialState);
 
   return (
-    <DiabeticStatsContext.Provider value={{ ...state, dispatch }}>
+    <DiabeticStatsContextProvider value={{ ...state, dispatch }}>
       {children}
-    </DiabeticStatsContext.Provider>
+    </DiabeticStatsContextProvider>
   );
-};
+}
