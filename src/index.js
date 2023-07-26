@@ -7,11 +7,11 @@ import { AuthContextProvider } from './context/AuthContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContext.Provider>
-      <DiabeticStatsContext.Provider> 
+    <AuthContextProvider>
+      <DiabeticStatsContextProvider> 
         <App />
-      </DiabeticStatsContext.Provider>
-    </AuthContext.Provider>
+      </DiabeticStatsContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
