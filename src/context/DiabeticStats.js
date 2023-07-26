@@ -31,7 +31,7 @@ const diabeticStatsReducer = (state, action) => {
   }
 };
 
-// Create the context provider component
+
 export const DiabeticStatsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(diabeticStatsReducer, initialState);
 
