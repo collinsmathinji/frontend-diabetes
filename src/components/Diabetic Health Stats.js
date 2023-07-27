@@ -91,7 +91,7 @@ const DiabeticStatsDetails = ({ stats }) => {
           <p><strong>Insulin Intake (units): </strong>{diabeticStats.insulinIntake}</p>
           <p><strong>Medication: </strong>{diabeticStats.medication}</p>
           <p><strong>Time: </strong>{format(new Date(diabeticStats.updatedAt), 'MMMM d, yyyy h:mm a')}</p>
-          <button onClick={handleDelete}>Delete</button>
+         
           <p><strong>Average Blood Sugar Level (mg/dL): </strong>{averageBloodSugarLevel}</p>
           <Doughnut
             data={data}
