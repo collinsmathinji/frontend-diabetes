@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDiabeticContext } from '../hooks/DiabeticStatsContext';
 import { useAuthContext } from '../hooks/useAuthContext';
-import low from "./low.jpg";
+
 import { format } from 'date-fns';
-import { Link } from 'react-router-dom';
 
 
 const DiabeticStatsDetails = ({ stats }) => {
