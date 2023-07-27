@@ -17,7 +17,7 @@ const DiabeticStatsForm = () => {
 
   useEffect(() => {
     // Calculate the average blood sugar level
-    if (diabeticStats.length > 0) {
+    if (diabeticStats && diabeticStats.length > 0) {
       const totalBloodSugar = diabeticStats.reduce((sum, entry) => sum + entry.bloodSugarLevel, 0);
       const average = totalBloodSugar / diabeticStats.length;
       setAverageBloodSugarLevel(average);
