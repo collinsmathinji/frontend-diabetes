@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDiabeticContext } from '../hooks/DiabeticStatsContext';
 import { useAuthContext } from '../hooks/useAuthContext';
-import { format } from 'date-fns';
 import { Doughnut } from 'react-chartjs-2';
 
 const DiabeticStatsForm = () => {
-  const { dispatch, diabeticStats } = useDiabeticContext();
+  const { dispatch } = useDiabeticContext();
   const { user } = useAuthContext();
 
   const [bloodSugarLevel, setBloodSugarLevel] = useState('');
@@ -14,15 +13,39 @@ const DiabeticStatsForm = () => {
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
   const [averageBloodSugarLevel, setAverageBloodSugarLevel] = useState(0);
+  const [userDiabeticStats, setUserDiabeticStats] = useState([]);
 
   useEffect(() => {
-    // Calculate the average blood sugar level
-    if (diabeticStats && diabeticStats.length > 0) {
-      const totalBloodSugar = diabeticStats.reduce((sum, entry) => sum + entry.bloodSugarLevel, 0);
-      const average = totalBloodSugar / diabeticStats.length;
+    fetchUserDiabeticStats();
+  }, []);
+
+  const fetchUserDiabeticStats = async () => {
+    try {
+      const response = await fetch('https://diabetes-back.vercel.app/api/diabeticStats', {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        setUserDiabeticStats(data);
+        calculateAverageBloodSugar(data);
+      } else {
+        // Handle error if needed
+      }
+    } catch (error) {
+      // Handle error if needed
+    }
+  };
+
+  const calculateAverageBloodSugar = (data) => {
+    if (data && data.length > 0) {
+      const totalBloodSugar = data.reduce((sum, entry) => sum + entry.bloodSugarLevel, 0);
+      const average = totalBloodSugar / data.length;
       setAverageBloodSugarLevel(average);
     }
-  }, [diabeticStats]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,6 +84,10 @@ const DiabeticStatsForm = () => {
         setMedication('');
         setError(null);
         setEmptyFields([]);
+
+        // After adding a new diabetic stat, update the user's diabetic stats and recalculate average
+        setUserDiabeticStats([...userDiabeticStats, data]);
+        calculateAverageBloodSugar([...userDiabeticStats, data]);
       } else {
         // Handle error response from the server
         setError('Failed to add diabetic stats');
@@ -83,7 +110,7 @@ const DiabeticStatsForm = () => {
   return (
     <div>
       <form className="diabetic-stats-form" onSubmit={handleSubmit}>
-        <h1 className='note'>Note!!Input data within a time frame of 2 hours after meal</h1>
+        <h1 className='note'>Note!! Input data within a time frame of 2 hours after meal</h1>
         <h3>Enter Diabetic Health Stats</h3>
 
         <div className="form-group">
@@ -123,8 +150,8 @@ const DiabeticStatsForm = () => {
         {error && <div className="error">{error}</div>}
       </form>
 
-      {/* Display Donut Graph */}
-      {diabeticStats.length > 0 && (
+      {/* Display Donut Chart */}
+      {userDiabeticStats.length > 0 && (
         <div className="average-blood-sugar-graph">
           <h3>Average Blood Sugar Level</h3>
           <Doughnut
