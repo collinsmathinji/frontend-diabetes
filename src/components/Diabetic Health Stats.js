@@ -73,16 +73,35 @@ const DiabeticStatsDetails = ({ stats }) => {
     ? (
         <>
           Hypoglycemia. (Give 3 jelly babies/150ml fruit juice...recommended) 
-          <a href="https://medlineplus.gov/ency/article/000386.htm#:~:text=Low%20blood%20sugar%20is%20a,low%20blood%20sugar%20is%20hypoglycemia." target="_blank" rel="noopener noreferrer" className="lowwer">
-          More insight
-          </a>
-        </>
+         </>
       ): "None"}
           </p>
           <p><strong>Insulin Intake (units): </strong>{diabeticStats.insulinIntake}</p>
           <p><strong>Medication: </strong>{diabeticStats.medication}</p>
           <p><strong>Time: </strong>{format(new Date(diabeticStats.updatedAt), 'MMMM d, yyyy h:mm a')}</p>
           <button onClick={handleDelete}>Delete</button>
+          <button className={diabeticStats.bloodSugarLevel > 200 ? 'Diabetes-melitus' : diabeticStats.bloodSugarLevel < 70 ? 'Hypoglycemia' : 'normal'}><strong>Diabetes Type: </strong>
+            {diabeticStats.bloodSugarLevel > 200 ?  (
+        <>
+          <a href="https://www.healthdirect.gov.au/hyperglycaemia-high-blood-sugar#:~:text=you%20get%20sick-,Complications%20of%20hyperglycaemia,in%20your%20blood%20or%20urine" className="lowwer">
+         More insight
+          </a>
+        </>
+      ):  diabeticStats.bloodSugarLevel < 70
+    ? (
+        <>
+          <a href="https://medlineplus.gov/ency/article/000386.htm#:~:text=Low%20blood%20sugar%20is%20a,low%20blood%20sugar%20is%20hypoglycemia." target="_blank" rel="noopener noreferrer" className="lowwer">
+          More insight
+          </a>
+        </>
+      ): (
+        <>
+          <a href="https://www.hsph.harvard.edu/nutritionsource/disease-prevention/diabetes-prevention/preventing-diabetes-full-story/" className="lowwer">
+         Prevention
+          </a>
+        </>
+      )}
+        </button>
         </>
       ) : (
         <p>Loading...</p>
