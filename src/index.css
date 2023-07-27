@@ -148,8 +148,12 @@ header a {
 }
 .lowwer{
   font-weight: bolder;
-  color: #c0c5c3;
+  color: #0b0b0bdd;
   background-color: #06543e;
+  border: #000000 2px;
+  border-radius: 5px;
+  text-decoration: none;
+  
 }
 .diabetic-stats-details h4 {
   margin: 0 0 10px 0;
