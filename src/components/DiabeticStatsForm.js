@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDiabeticContext } from '../hooks/DiabeticStatsContext';
+
 import { useAuthContext } from '../hooks/useAuthContext';
-import { Doughnut } from 'react-chartjs-2';
 
 const DiabeticStatsForm = () => {
+  // Update the context hook
   const { dispatch } = useDiabeticContext();
   const { user } = useAuthContext();
 
@@ -12,40 +13,7 @@ const DiabeticStatsForm = () => {
   const [medication, setMedication] = useState('');
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
-  const [averageBloodSugarLevel, setAverageBloodSugarLevel] = useState(0);
-  const [userDiabeticStats, setUserDiabeticStats] = useState([]);
-
-  useEffect(() => {
-    fetchUserDiabeticStats();
-  }, [fetchUserDiabeticStats]);
-
-  const fetchUserDiabeticStats = async () => {
-    try {
-      const response = await fetch('https://diabetes-back.vercel.app/api/diabeticStats', {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
-      });
-      const data = await response.json();
-
-      if (response.ok) {
-        setUserDiabeticStats(data);
-        calculateAverageBloodSugar(data);
-      } else {
-        // Handle error if needed
-      }
-    } catch (error) {
-      // Handle error if needed
-    }
-  };
-
-  const calculateAverageBloodSugar = (data) => {
-    if (data && data.length > 0) {
-      const totalBloodSugar = data.reduce((sum, entry) => sum + entry.bloodSugarLevel, 0);
-      const average = totalBloodSugar / data.length;
-      setAverageBloodSugarLevel(average);
-    }
-  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,7 +30,7 @@ const DiabeticStatsForm = () => {
       return;
     }
 
-    const diabeticStatsData = { bloodSugarLevel, insulinIntake, medication };
+    const diabeticStats = { bloodSugarLevel, insulinIntake, medication };
 
     try {
       const response = await fetch('https://diabetes-back.vercel.app/api/diabeticStats', {
@@ -71,7 +39,7 @@ const DiabeticStatsForm = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${user.token}`
         },
-        body: JSON.stringify(diabeticStatsData)
+        body: JSON.stringify(diabeticStats)
       });
 
       const data = await response.json();
@@ -84,10 +52,6 @@ const DiabeticStatsForm = () => {
         setMedication('');
         setError(null);
         setEmptyFields([]);
-
-        // After adding a new diabetic stat, update the user's diabetic stats and recalculate average
-        setUserDiabeticStats([...userDiabeticStats, data]);
-        calculateAverageBloodSugar([...userDiabeticStats, data]);
       } else {
         // Handle error response from the server
         setError('Failed to add diabetic stats');
@@ -98,75 +62,51 @@ const DiabeticStatsForm = () => {
     }
   };
 
-  const data = {
-    datasets: [
-      {
-        data: [averageBloodSugarLevel, 600 - averageBloodSugarLevel], // Assuming the max value is 600
-        backgroundColor: ['#36A2EB', '#FF6384'], // Colors for the segments
-      },
-    ],
-  };
-
   return (
-    <div>
-      <form className="diabetic-stats-form" onSubmit={handleSubmit}>
-        <h1 className='note'>Note!! Input data within a time frame of 2 hours after meal</h1>
-        <h3>Enter Diabetic Health Stats</h3>
+    
+    <form className="diabetic-stats-form" onSubmit={handleSubmit}>
+      <h1 className='note'>Note!!Input data within a time frame of 2 hours after meal</h1>
+      <h3>Enter Diabetic Health Stats</h3>
 
-        <div className="form-group">
-          <label htmlFor="blood-sugar-level">Blood Sugar Level (mg/dL):</label>
-          <input
-            type="number"
-            id="blood-sugar-level"
-            onChange={(e) => setBloodSugarLevel(e.target.value)}
-            value={bloodSugarLevel}
-            className={emptyFields.includes('bloodSugarLevel') ? 'error' : ''}
-          />
-        </div>
+      <div className="form-group">
+        <label htmlFor="blood-sugar-level">Blood Sugar Level (mg/dL):</label>
+        <input
+          type="number"
+          id="blood-sugar-level"
+          onChange={(e) => setBloodSugarLevel(e.target.value)}
+          value={bloodSugarLevel}
+          className={emptyFields.includes('bloodSugarLevel') ? 'error' : ''}
+        />
+      </div>
 
-        <div className="form-group">
-          <label htmlFor="insulin-intake">Insulin Intake (units):</label>
-          <input
-            type="number"
-            id="insulin-intake"
-            onChange={(e) => setInsulinIntake(e.target.value)}
-            value={insulinIntake}
-            className={emptyFields.includes('insulinIntake') ? 'error' : ''}
-          />
-        </div>
+      <div className="form-group">
+        <label htmlFor="insulin-intake">Insulin Intake (units):</label>
+        <input
+          type="number"
+          id="insulin-intake"
+          onChange={(e) => setInsulinIntake(e.target.value)}
+          value={insulinIntake}
+          className={emptyFields.includes('insulinIntake') ? 'error' : ''}
+        />
+      </div>
 
-        <div className="form-group">
-          <label htmlFor="medication">Medication:</label>
-          <input
-            type="text"
-            id="medication"
-            onChange={(e) => setMedication(e.target.value)}
-            value={medication}
-            className={emptyFields.includes('medication') ? 'error' : ''}
-          />
-        </div>
+      <div className="form-group">
+        <label htmlFor="medication">Medication:</label>
+        <input
+          type="text"
+          id="medication"
+          onChange={(e) => setMedication(e.target.value)}
+          value={medication}
+          className={emptyFields.includes('medication') ? 'error' : ''}
+        />
+      </div>
 
-        <button className="submit-btn">Add Diabetic Stats</button>
-        {error && <div className="error">{error}</div>}
-      </form>
-
-      {/* Display Donut Chart */}
-      {userDiabeticStats.length > 0 && (
-        <div className="average-blood-sugar-graph">
-          <h3>Average Blood Sugar Level</h3>
-          <Doughnut
-            data={data}
-            options={{
-              cutout: '70%',
-              legend: {
-                display: false,
-              },
-            }}
-          />
-        </div>
-      )}
-    </div>
+      <button className="submit-btn">Add Diabetic Stats</button>
+      {error && <div className="error">{error}</div>}
+     
+  
+    </form>
   );
 };
 
-export default DiabeticStatsForm;
+export default DiabeticStatsForm; 
