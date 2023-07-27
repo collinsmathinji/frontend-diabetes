@@ -69,7 +69,7 @@ const DiabeticStatsDetails = ({ stats }) => {
             {diabeticStats.bloodSugarLevel > 200 ? "High Sugar level" : diabeticStats.bloodSugarLevel < 70 ? "Low Sugar level" : "Normal sugar level"}
           </p>
           <p className={diabeticStats.bloodSugarLevel > 200 ? 'Diabetes-melitus' : diabeticStats.bloodSugarLevel < 70 ? 'Hypoglycemia' : 'normal'}><strong>Diabetes Type: </strong>
-            {diabeticStats.bloodSugarLevel > 200 ? `Diabetes mellitus(Type 1 or 2)(  Insulin shot recommended)" : diabeticStats.bloodSugarLevel < 70 ? "Hypoglycemia.(Give 3 jelly babies/150ml fruit juice...recommended) ${<Link to={'https://medlineplus.gov/ency/article/000386.htm#:~:text=Low%20blood%20sugar%20is%20a,low%20blood%20sugar%20is%20hypoglycemia.'}>{low}</Link>}` : "None"}
+            {diabeticStats.bloodSugarLevel > 200 ? "Diabetes mellitus(Type 1 or 2)(  Insulin shot recommended)" : diabeticStats.bloodSugarLevel < 70 ? `Hypoglycemia.(Give 3 jelly babies/150ml fruit juice...recommended) ${<Link to={'https://medlineplus.gov/ency/article/000386.htm#:~:text=Low%20blood%20sugar%20is%20a,low%20blood%20sugar%20is%20hypoglycemia.'}>{low}</Link>}` : "None"}
           </p>
           <p><strong>Insulin Intake (units): </strong>{diabeticStats.insulinIntake}</p>
           <p><strong>Medication: </strong>{diabeticStats.medication}</p>
