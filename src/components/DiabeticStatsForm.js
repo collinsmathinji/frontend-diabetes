@@ -17,7 +17,7 @@ const DiabeticStatsForm = () => {
 
   useEffect(() => {
     fetchUserDiabeticStats();
-  }, []);
+  }, [fetchUserDiabeticStats]);
 
   const fetchUserDiabeticStats = async () => {
     try {
