@@ -74,7 +74,7 @@ const DiabeticStatsDetails = ({ stats }) => {
         <>
           Hypoglycemia. (Give 3 jelly babies/150ml fruit juice...recommended) 
           <a href="https://medlineplus.gov/ency/article/000386.htm#:~:text=Low%20blood%20sugar%20is%20a,low%20blood%20sugar%20is%20hypoglycemia." target="_blank" rel="noopener noreferrer">
-          {low}
+          [More insight]
           </a>
         </>
       ): "None"}
