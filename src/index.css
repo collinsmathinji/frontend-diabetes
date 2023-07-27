@@ -144,8 +144,20 @@ header a {
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
- 
+  animation-name: details;
+  animation-duration: 7s;
+  animation-delay: 0;
+  animation-iteration-count: 1;
 }
+@keyframes details {
+  0% {
+    transform: rotate3d(1, 0, 0, 360deg);
+  }
+  100% {
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+}
+
 .buttons{
   display: flex;
   flex-direction: row;
