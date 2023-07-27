@@ -146,7 +146,11 @@ header a {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
  
 }
-
+.lowwer{
+  font-weight: bolder;
+  color: #c0c5c3;
+  background-color: #06543e;
+}
 .diabetic-stats-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
