@@ -22,7 +22,7 @@ const Footer = () => {
         <nav>
           {user && (
             <div className='footercon'>
-              <button onClick={handleClick} className='navout'>in case of Emergency</button>
+              <button onClick={handleClick} className='navout'>incase of Emergency</button>
             </div>
           )}
           {!user && (
