@@ -79,8 +79,9 @@ const DiabeticStatsDetails = ({ stats }) => {
           <p><strong>Insulin Intake (units): </strong>{diabeticStats.insulinIntake}</p>
           <p><strong>Medication: </strong>{diabeticStats.medication}</p>
           <p><strong>Time: </strong>{format(new Date(diabeticStats.updatedAt), 'MMMM d, yyyy h:mm a')}</p>
+          <div className="buttons">
           <button onClick={handleDelete}>Delete</button>
-          <button className={diabeticStats.bloodSugarLevel > 200 ? 'Diabetes-melitus' : diabeticStats.bloodSugarLevel < 70 ? 'Hypoglycemia' : 'normal'}><strong>Diabetes Type: </strong>
+          <button className={diabeticStats.bloodSugarLevel > 200 ? 'Diabetes-melitus' : diabeticStats.bloodSugarLevel < 70 ? 'Hypoglycemia' : 'normal'}><strong>Learn More: </strong>
             {diabeticStats.bloodSugarLevel > 200 ?  (
         <>
           <a href="https://www.healthdirect.gov.au/hyperglycaemia-high-blood-sugar#:~:text=you%20get%20sick-,Complications%20of%20hyperglycaemia,in%20your%20blood%20or%20urine" className="lowwer">
@@ -102,6 +103,7 @@ const DiabeticStatsDetails = ({ stats }) => {
         </>
       )}
         </button>
+        </div>
         </>
       ) : (
         <p>Loading...</p>
