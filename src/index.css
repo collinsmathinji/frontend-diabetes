@@ -461,6 +461,10 @@ form.login button{
   align-items: center;
  }
 }
+.head{
+  color: #074634;
+  text-shadow: 2px 2px orange;
+}
 @media (min-width:800px) {
   .diabetic-stats-details {
     background-color: rgba(47, 79, 79, 0.427);

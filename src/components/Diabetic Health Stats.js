@@ -62,7 +62,7 @@ const DiabeticStatsDetails = ({ stats }) => {
     <div className="diabetic-stats-details">
       {diabeticStats ? (
         <>
-          <h4>Diabetic Health Stats</h4>
+          <h4 className="head">Diabetic Health Stats</h4>
           <p><strong>Blood Sugar Level (mg/dL): </strong>{diabeticStats.bloodSugarLevel}</p>
           <p className={diabeticStats.bloodSugarLevel > 200 ? 'high-sugar-level' : diabeticStats.bloodSugarLevel < 70 ? 'low-sugar-level' :diabeticStats.bloodSugarLevel > 600 ? "emergency-2" : 'normal-sugar-level'}><strong>Risk-Emerged:</strong>
             {diabeticStats.bloodSugarLevel > 200 ? "High Sugar level" : diabeticStats.bloodSugarLevel < 70 ? "Low Sugar level" : "Normal sugar level"}
