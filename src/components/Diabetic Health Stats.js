@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useDiabeticContext } from '../hooks/DiabeticStatsContext';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { format } from 'date-fns';
-import { Doughnut } from 'react-chartjs-2';
+
 
 const DiabeticStatsDetails = ({ stats }) => {
   const { dispatch } = useDiabeticContext();
   const { user } = useAuthContext();
 
   const [diabeticStats, setDiabeticStats] = useState(null);
-  const [averageBloodSugarLevel, setAverageBloodSugarLevel] = useState(0);
-
+ 
   const handleDelete = async () => {
     try {
       const response = await fetch(`https://diabetes-back.vercel.app/api/diabeticStats/${stats._id}`, {
@@ -43,6 +42,8 @@ const DiabeticStatsDetails = ({ stats }) => {
 
         if (response.ok) {
           setDiabeticStats(json);
+
+         
         } else {
           // Handle error if needed
         }
@@ -55,26 +56,6 @@ const DiabeticStatsDetails = ({ stats }) => {
       fetchDiabeticStats();
     }
   }, [user, stats._id]);
-
-  useEffect(() => {
-    if (diabeticStats && diabeticStats.length > 0) {
-      const totalBloodSugar = diabeticStats.reduce(
-        (sum, entry) => sum + entry.bloodSugarLevel,
-        0
-      );
-      const average = totalBloodSugar / diabeticStats.length;
-      setAverageBloodSugarLevel(average);
-    }
-  }, [diabeticStats]);
-
-  const data = {
-    datasets: [
-      {
-        data: [averageBloodSugarLevel, 600 - averageBloodSugarLevel], // Assuming the max value is 600
-        backgroundColor: ['#36A2EB', '#FF6384'], // Colors for the segments
-      },
-    ],
-  };
 
   return (
     <div className="diabetic-stats-details">
@@ -91,22 +72,12 @@ const DiabeticStatsDetails = ({ stats }) => {
           <p><strong>Insulin Intake (units): </strong>{diabeticStats.insulinIntake}</p>
           <p><strong>Medication: </strong>{diabeticStats.medication}</p>
           <p><strong>Time: </strong>{format(new Date(diabeticStats.updatedAt), 'MMMM d, yyyy h:mm a')}</p>
-         
-          <p><strong>Average Blood Sugar Level (mg/dL): </strong>{averageBloodSugarLevel}</p>
-          <Doughnut
-            data={data}
-            options={{
-              cutout: '70%', 
-              legend: {
-                display: false, 
-              },
-            }}
-          />
           <button onClick={handleDelete}>Delete</button>
         </>
       ) : (
         <p>Loading...</p>
       )}
+       
     </div>
   );
 };
